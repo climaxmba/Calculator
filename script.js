@@ -11,6 +11,9 @@ ready();
 function ready() {
     clearDisplay();
 
+    document.getElementById('clear').onclick = () => clearDisplay();
+    document.getElementById('del').onclick = () => updateDisplay1('', 'del');
+    
     for (let i = 0; i < numbers.length; i++) {
         numbers[i].addEventListener('click', () => updateDisplay1(numbers[i].textContent));
     }
@@ -29,6 +32,7 @@ function ready() {
 function clearDisplay() {
     display1.textContent = '';
     display2.textContent = '';
+    currDisplay1 = '';
 }
 
 function updateDisplay1(btn, del) {
