@@ -16,7 +16,7 @@ body {
     height: 70vh;
     width: 45vh;
     padding: 16px;
-    margin-top: 32px;
+    margin: 32px 0;
     display: grid;
     grid-template-rows: 2fr 3fr;
 }
@@ -67,4 +67,18 @@ body {
 #ans {
     grid-column-start: -3;
     grid-column-end: -1;
+}
+
+header {
+    font-size: x-large;
+}
+
+footer a {
+    color: black;
+    width: 100%;
+    text-decoration: none;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
