@@ -18,6 +18,7 @@ body {
     padding: 16px;
     margin-top: 32px;
     display: grid;
+    grid-template-rows: 2fr 3fr;
 }
 
 #calc-display-container {
@@ -26,13 +27,22 @@ body {
     border-radius: 3px;
     padding: 8px;
     margin: 18px 0;
-    display: grid;}
+    display: grid;
+}
 
 .calc-display {
-    justify-content: space-around;
     font-size: x-large;
     font-weight: 500;
     text-align: right;
+    overflow-x: scroll;
+}
+
+.calc-display::-webkit-scrollbar {
+    height: 10px;
+}
+
+.calc-display::-webkit-scrollbar-thumb {
+    background-color: #8db3a0;
 }
 
 #calc-btns-container {

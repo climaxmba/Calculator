@@ -58,10 +58,12 @@ function updateDisplay1(btn, del) {
     )
     currDisplay1 = display1.textContent;
     processCurrDisplay1();
+    display1.scrollLeft = display1.scrollWidth;
 }
 
 function updateDisplay2() {
     display2.textContent = parseDisplay();
+    display2.scrollLeft = display1.scrollWidth;
 }
 
 function processCurrDisplay1() {
