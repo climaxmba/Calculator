@@ -56,7 +56,11 @@ function clearDisplay() {
 
 function updateDisplay1(btn, del) {
     if (!del) {
-        display.display1.textContent += btn;  
+        if ((btn == ans) && (ans.toString().includes('e'))) {
+            display.display1.textContent += BigInt(btn);
+        } else {
+            display.display1.textContent += btn; 
+        }
     } else (
         display.display1.textContent = display.display1.textContent.slice(0, -1)
     )
@@ -124,7 +128,9 @@ function operate(num1, operator, num2) {
         case '-':
             return subtract(num1, num2);
         case '÷':
-            return divide(num1, num2);
+            if (num2 != 0) return divide(num1, num2);
+            alert('Can not divide by 0');
+            return ans;
         case '×':
             return multiply(num1, num2);
         default:
