@@ -1,22 +1,26 @@
-const display1 = document.getElementById('display-1');
-const display2 = document.getElementById('display-2');
 const numbers = document.querySelectorAll('.numbers');
 const operators = document.querySelectorAll('.operators');
 const signs = '+-÷×';
-let currDisplay1 = '';
-let currDisplay2 = '';
-let display1Nums = [];
-let display1Signs = [];
 let ans = '';
+let display = {
+    display1: document.getElementById('display-1'),
+    display2: document.getElementById('display-2'),
+    display1Nums: [],
+    display1Signs: []
+}
+let currDisplay = {
+    display1: '',
+    display2: ''
+}
 
-ready();
+main();
 
-function ready() {
+function main() {
     clearDisplay();
 
     document.getElementById('clear').onclick = () => clearDisplay();
     document.getElementById('del').onclick = () => updateDisplay1('', 'del');
-    document.getElementById('decimal-point').onclick = () => {if (!display1Nums[display1Nums.length - 1].includes('.')) updateDisplay1('.')}
+    document.getElementById('decimal-point').onclick = () => {if (!display.display1Nums[display.display1Nums.length - 1].includes('.')) updateDisplay1('.')}
     document.getElementById('ans').onclick = () => updateDisplay1(ans);
     document.getElementById('equals-to').onclick = () => updateDisplay2();
 
@@ -25,17 +29,17 @@ function ready() {
     }
     for (let i = 0; i < operators.length; i++) {
         operators[i].onclick = () => {
-            if ((display1Nums.length >= 2) && (display1Nums[1] != '')) {
+            if ((display.display1Nums.length >= 2) && (display.display1Nums[1] != '')) {
                 let tmpAns = ans;
-                currDisplay1 = parseDisplay();
-                display1.textContent = ans;
+                currDisplay.display1 = parseDisplay();
+                display.display1.textContent = ans;
                 updateDisplay1(operators[i].textContent);
                 ans = tmpAns;
             } else {
-                if (!signs.includes(display1.textContent.slice(-1))) {
+                if (!signs.includes(display.display1.textContent.slice(-1))) {
                     updateDisplay1(operators[i].textContent);
                 } else {
-                    display1.textContent = display1.textContent.slice(0, -1);
+                    display.display1.textContent = display.display1.textContent.slice(0, -1);
                     updateDisplay1(operators[i].textContent);
                 }
             }
@@ -44,55 +48,55 @@ function ready() {
 }
 
 function clearDisplay() {
-    display1.textContent = '';
-    display2.textContent = '';
-    currDisplay1 = '';
+    display.display1.textContent = '';
+    display.display2.textContent = '';
+    currDisplay.display1 = '';
     processCurrDisplay1();
 }
 
 function updateDisplay1(btn, del) {
     if (!del) {
-        display1.textContent += btn;  
+        display.display1.textContent += btn;  
     } else (
-        display1.textContent = display1.textContent.slice(0, -1)
+        display.display1.textContent = display.display1.textContent.slice(0, -1)
     )
-    currDisplay1 = display1.textContent;
+    currDisplay.display1 = display.display1.textContent;
     processCurrDisplay1();
-    display1.scrollLeft = display1.scrollWidth;
+    display.display1.scrollLeft = display.display1.scrollWidth;
 }
 
 function updateDisplay2() {
-    display2.textContent = parseDisplay();
-    display2.scrollLeft = display1.scrollWidth;
+    display.display2.textContent = parseDisplay();
+    display.display2.scrollLeft = display.display2.scrollWidth;
 }
 
 function processCurrDisplay1() {
-    tmpArr = currDisplay1.split('');
-    display1Nums = [];
-    display1Signs = [];
+    tmpArr = currDisplay.display1.split('');
+    display.display1Nums = [];
+    display.display1Signs = [];
 
     for (let i = 0; i < tmpArr.length; i++) {
         if (!signs.includes(tmpArr[i])) {
-            display1Nums.push(tmpArr[i]);
+            display.display1Nums.push(tmpArr[i]);
         } else {
-            display1Nums.push(',');
-            display1Signs.push(tmpArr[i]);
+            display.display1Nums.push(',');
+            display.display1Signs.push(tmpArr[i]);
         }
     }
 
-    display1Nums = display1Nums.join('').split(',');
+    display.display1Nums = display.display1Nums.join('').split(',');
 }
 
 function parseDisplay() {
-    if (!display1Nums[1] && !display1Signs[0]) {
-        ans = Number(display1.textContent);
-    } else if (!display1Nums[1] && display1Signs[0]) {
-        ans = operate(Number(display1Nums[0]), display1Signs[0], Number(display1Nums[0]));
+    if (!display.display1Nums[1] && !display.display1Signs[0]) {
+        ans = Number(display.display1.textContent);
+    } else if (!display.display1Nums[1] && display.display1Signs[0]) {
+        ans = operate(Number(display.display1Nums[0]), display.display1Signs[0], Number(display.display1Nums[0]));
     } else {
-        if (display1Nums.length <= 2) {
-            ans = operate(Number(display1Nums[0]), display1Signs[0], Number(display1Nums[1]));
+        if (display.display1Nums.length <= 2) {
+            ans = operate(Number(display.display1Nums[0]), display.display1Signs[0], Number(display.display1Nums[1]));
         } else {
-            ans = Number(display1Nums[0]);
+            ans = Number(display.display1Nums[0]);
         }
     }
     if (ans) return ans;
