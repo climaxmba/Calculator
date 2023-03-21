@@ -2,7 +2,7 @@
 
 body {
     margin: 0;
-    background-color: #a0b8ce;
+    background-color: #889bad;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,7 +12,7 @@ body {
 #calc {
     border: 1px solid black;
     border-radius: 5px;
-    background-color: #929292;
+    background-color: #c0c0c0;
     height: 80vh;
     width: 50vh;
     padding: 16px;
@@ -64,13 +64,44 @@ body {
     gap: 3px;
 }
 
+.calc-btns {
+    font-family: Play, 'Open Sans', sans-serif;
+    font-size: large;
+}
+
+#del,
+#clear {
+    border: 1px outset black;
+    background-color: #ff88a2;
+}
+
+#del:active,
+#clear:active {
+    background-color: #d87188;
+}
+
+.operators {
+    background-color: #ffc352;
+    border: 1px outset black;
+}
+
+.operators:active {
+    background-color: #e0ab48;
+}
+
 #ans {
     grid-column-start: -3;
     grid-column-end: -1;
+    border: 1px outset black;
+    background-color: lightblue;
+}
+
+#ans:active {
+    background-color: #93b7c4;
 }
 
 a {
-    color: black;
+    color: white;
     text-decoration: none;
     display: flex;
     font-size: 18px;
