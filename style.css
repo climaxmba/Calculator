@@ -100,13 +100,27 @@ body {
     background-color: #93b7c4;
 }
 
-a {
-    color: white;
-    text-decoration: none;
+footer {
     display: flex;
-    font-size: 18px;
-    gap: 8px;
-    margin: 2vh 0;
     align-items: center;
     justify-content: center;
+    color: white;
+    gap: 8px;
+    margin: 2vh 0;
+    font-size: 18px;
+    flex-shrink: 1;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+}
+
+#pipe {
+    font-size: xx-large;
+    font-weight: lighter;
 }
