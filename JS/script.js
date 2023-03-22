@@ -24,6 +24,23 @@ function main() {
     document.getElementById('ans').onclick = () => updateDisplay1(ans);
     document.getElementById('equals-to').onclick = () => updateDisplay2();
 
+    window.addEventListener("keydown", function (event) {
+        if (event.defaultPrevented) {
+            return; // Do nothing if the event was already processed
+        }
+
+        if ("1234567890".includes(event.key)) {
+            updateDisplay1(event.key);
+        } else if ((signs + "/*=").includes(event.key)) {
+            this.alert('Not yet supported, use the buttons!');
+        } else if (event.key == ".") {
+            if (!display.display1Nums[display.display1Nums.length - 1].includes('.')) updateDisplay1('.');
+        }
+
+        // Cancel the default action to avoid it being handled twice
+        event.preventDefault();
+    }, true);
+
     for (let i = 0; i < numbers.length; i++) {
         numbers[i].addEventListener('click', () => updateDisplay1(numbers[i].textContent))
     }
