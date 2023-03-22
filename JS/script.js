@@ -24,17 +24,34 @@ function main() {
     document.getElementById('ans').onclick = () => updateDisplay1(ans);
     document.getElementById('equals-to').onclick = () => updateDisplay2();
 
-    window.addEventListener("keydown", function (event) {
+    document.addEventListener("keypress", function (event) {
         if (event.defaultPrevented) {
             return; // Do nothing if the event was already processed
         }
 
         if ("1234567890".includes(event.key)) {
             updateDisplay1(event.key);
-        } else if ((signs + "/*=").includes(event.key)) {
-            this.alert('Not yet supported, use the buttons!');
+        } else if (signs.includes(event.key)) {
+            if ((display.display1Nums.length >= 2) && (display.display1Nums[1] != '')) {
+                let tmpAns = ans;
+                currDisplay.display1 = parseDisplay();
+                display.display1.textContent = ans;
+                updateDisplay1(event.key);
+                ans = tmpAns;
+            } else {
+                if (!signs.includes(display.display1.textContent.slice(-1))) {
+                    updateDisplay1(event.key);
+                } else {
+                    display.display1.textContent = display.display1.textContent.slice(0, -1);
+                    updateDisplay1(event.key);
+                }
+            }
+        } else if ("/*".includes(event.key)) {
+            return;// display signs
         } else if (event.key == ".") {
             if (!display.display1Nums[display.display1Nums.length - 1].includes('.')) updateDisplay1('.');
+        } else if (event.key == "=") {
+            updateDisplay2();
         }
 
         // Cancel the default action to avoid it being handled twice
@@ -65,9 +82,9 @@ function main() {
 }
 
 function clearDisplay() {
-    display.display1.textContent = '';
+    display.display1.textContent = '0';
     display.display2.textContent = '';
-    currDisplay.display1 = '';
+    currDisplay.display1 = '0';
     processCurrDisplay1();
 }
 
@@ -78,9 +95,9 @@ function updateDisplay1(btn, del) {
         } else {
             display.display1.textContent += btn; 
         }
-    } else (
-        display.display1.textContent = display.display1.textContent.slice(0, -1)
-    )
+    } else {
+        if (currDisplay.display1 != '0')display.display1.textContent = display.display1.textContent.slice(0, -1)
+    }
     currDisplay.display1 = display.display1.textContent;
     processCurrDisplay1();
     display.display1.scrollLeft = display.display1.scrollWidth;
