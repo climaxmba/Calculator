@@ -6,4 +6,4 @@ This is the project __Calculator__ from [TheOdinProject](https://www.theodinproj
 
 ## View online
 
-Please click [here](https://climaxmba.github.io/calculator/) to view the demo.
+Please click [here](https://climaxmba.github.io/Calculator/) to view the demo.
