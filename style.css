@@ -10,7 +10,7 @@ body {
 }
 
 #calc {
-    border: 1px solid black;
+    border: 0.5px inset black;
     border-radius: 5px;
     background-color: #c0c0c0;
     height: 80vh;
@@ -23,7 +23,7 @@ body {
 
 #calc-display-container {
     background-color: #abd8c2;
-    border: 1px solid black;
+    border: 0.5px inset black;
     border-radius: 3px;
     padding: 8px;
     margin: 18px 0;
@@ -123,4 +123,25 @@ a {
 #pipe {
     font-size: xx-large;
     font-weight: lighter;
+}
+
+@media (max-width: 750px) {
+    #calc {
+        padding: 12px;
+    }
+}
+
+@media (max-width: 420px) {
+    #calc {
+        width: 45vh;
+        height: 68vh;
+        margin: 32px 8px;
+    }
+}
+
+@media screen and (max-width: 420px) and (min-height: 800px) {
+    #calc {
+        padding: 12px;
+        width: 40vh;
+    }
 }
