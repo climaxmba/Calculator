@@ -24,6 +24,11 @@ function main() {
     document.getElementById('ans').onclick = () => updateDisplay1(ans);
     document.getElementById('equals-to').onclick = () => updateDisplay2();
 
+    document.onkeydown = (e) => {
+        (e.key == 'Backspace')?
+        display.display1.textContent = display.display1.textContent.slice(0, -1)
+        : null;
+    };
     document.addEventListener("keypress", function (event) {
         if (event.defaultPrevented) {
             return; // Do nothing if the event was already processed
@@ -46,8 +51,6 @@ function main() {
                     updateDisplay1(event.key);
                 }
             }
-        } else if ("/*".includes(event.key)) {
-            return;// display signs
         } else if (event.key == ".") {
             if (!display.display1Nums[display.display1Nums.length - 1].includes('.')) updateDisplay1('.');
         } else if (event.key == "=") {
