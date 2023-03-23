@@ -82,9 +82,9 @@ function main() {
 }
 
 function clearDisplay() {
-    display.display1.textContent = '0';
+    display.display1.textContent = '';
     display.display2.textContent = '';
-    currDisplay.display1 = '0';
+    currDisplay.display1 = '';
     processCurrDisplay1();
 }
 
@@ -96,7 +96,7 @@ function updateDisplay1(btn, del) {
             display.display1.textContent += btn; 
         }
     } else {
-        if (currDisplay.display1 != '0')display.display1.textContent = display.display1.textContent.slice(0, -1)
+        display.display1.textContent = display.display1.textContent.slice(0, -1)
     }
     currDisplay.display1 = display.display1.textContent;
     processCurrDisplay1();
@@ -164,7 +164,7 @@ function operate(num1, operator, num2) {
         case '÷':
             if (num2 != 0) return divide(num1, num2);
             alert('Can not divide by 0');
-            return ans;
+            return 0;
         case '×':
             return multiply(num1, num2);
         default:
