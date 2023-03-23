@@ -91,12 +91,24 @@ function clearDisplay() {
 function updateDisplay1(btn, del) {
     if (!del) {
         if ((btn == ans) && (ans.toString().includes('e'))) {
-            display.display1.textContent += BigInt(btn);
+            let tmpAns = ans;
+            (display.display1Nums.length > 2)?
+            display.display1.textContent = parseDisplay().toString() + BigInt(tmpAns) : display.display1.textContent += BigInt(tmpAns);
+        } else if (btn == ans) {
+            let tmpAns = ans;
+            if ((ans < 0) && (signs.includes(display.display1.textContent.slice(-1)))) {
+                display.display1.textContent = display.display1.textContent.slice(0, -1);
+                (display.display1Nums.length >= 2)?
+                display.display1.textContent = parseDisplay() + tmpAns : display.display1.textContent += tmpAns;
+            } else {
+                (display.display1Nums.length >= 2)?
+                display.display1.textContent = parseDisplay() + tmpAns : display.display1.textContent += tmpAns;
+            }
         } else {
-            display.display1.textContent += btn; 
+            display.display1.textContent += btn;
         }
     } else {
-        display.display1.textContent = display.display1.textContent.slice(0, -1)
+        display.display1.textContent = display.display1.textContent.slice(0, -1);
     }
     currDisplay.display1 = display.display1.textContent;
     processCurrDisplay1();
