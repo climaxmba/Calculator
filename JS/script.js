@@ -113,12 +113,24 @@ function processCurrDisplay1() {
     display.display1Nums = [];
     display.display1Signs = [];
 
-    for (let i = 0; i < tmpArr.length; i++) {
-        if (!signs.includes(tmpArr[i])) {
-            display.display1Nums.push(tmpArr[i]);
-        } else {
-            display.display1Nums.push(',');
-            display.display1Signs.push(tmpArr[i]);
+    if (tmpArr[0] == '-') {// Negative number for first operand
+        display.display1Nums.push('-')
+        for (let i = 1; i < tmpArr.length; i++) {
+            if (signs.includes(tmpArr[i])) {
+                display.display1Nums.push(',');
+                display.display1Signs.push(tmpArr[i]);
+            } else {
+                display.display1Nums.push(tmpArr[i]);
+            }
+        }
+    } else {
+        for (let i = 0; i < tmpArr.length; i++) {
+            if (signs.includes(tmpArr[i])) {
+                display.display1Nums.push(',');
+                display.display1Signs.push(tmpArr[i]);
+            } else {
+                display.display1Nums.push(tmpArr[i]);
+            }
         }
     }
 
@@ -126,13 +138,17 @@ function processCurrDisplay1() {
 }
 
 function parseDisplay() {
+    // If only one number, ans = the number
     if (!display.display1Nums[1] && !display.display1Signs[0]) {
         ans = Number(display.display1.textContent);
+    // If no second operand, but operator, operate with second operand as 0
     } else if (!display.display1Nums[1] && display.display1Signs[0]) {
-        ans = operate(Number(display.display1Nums[0]), display.display1Signs[0], Number(display.display1Nums[0]));
+        ans = operate(Number(display.display1Nums[0]), display.display1Signs[0], 0);
     } else {
+        // Normal operation
         if (display.display1Nums.length <= 2) {
             ans = operate(Number(display.display1Nums[0]), display.display1Signs[0], Number(display.display1Nums[1]));
+        // Default to ans = first operand
         } else {
             ans = Number(display.display1Nums[0]);
         }
