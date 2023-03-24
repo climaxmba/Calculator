@@ -92,6 +92,9 @@ function clearDisplay() {
 }
 
 function updateDisplay1(btn, del) {
+    if (display.display1.textContent.includes('Overflow')) clearDisplay();
+    if (display.display1.textContent.includes('e')) display.display1.textContent = 'Overflow';
+
     if (!del) {
         if ((btn == ans) && (ans.toString().includes('e'))) {
             let tmpAns = ans;
@@ -101,18 +104,16 @@ function updateDisplay1(btn, del) {
             let tmpAns = ans;
             if ((ans < 0) && (signs.includes(display.display1.textContent.slice(-1)))) {
                 display.display1.textContent = display.display1.textContent.slice(0, -1);
-                (display.display1Nums.length >= 2)?
-                display.display1.textContent = parseDisplay() + tmpAns : display.display1.textContent += tmpAns;
-            } else {
-                (display.display1Nums.length >= 2)?
-                display.display1.textContent = parseDisplay() + tmpAns : display.display1.textContent += tmpAns;
             }
+            (display.display1Nums.length >= 2)? clearDisplay() : null;
+            display.display1.textContent += tmpAns;
         } else {
             display.display1.textContent += btn;
         }
     } else {
         display.display1.textContent = display.display1.textContent.slice(0, -1);
     }
+
     currDisplay.display1 = display.display1.textContent;
     processCurrDisplay1();
     display.display1.scrollLeft = display.display1.scrollWidth;
