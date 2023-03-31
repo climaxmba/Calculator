@@ -15,3 +15,7 @@ themeBtn.onclick = () => {
         themeBtn.textContent = 'light_mode';
     }
 }
+
+window.onload = () => {
+    document.querySelector(".material-symbols-outlined").textContent = "light_mode";
+};
